@@ -1,0 +1,114 @@
+/* =====================================================================
+   /resume/ — o'qishga qulay hujjat sirti + chop etish uslubi.
+   Matn orqasida blur yo'q: hujjat to'liq rangli sirtda turadi.
+   ===================================================================== */
+
+.resume-main { padding-top: calc(var(--nav-h) + var(--nav-top) + clamp(24px, 4vw, 48px)); }
+.resume-wrap { max-width: calc(880px + var(--gutter) * 2); }
+
+.doc-actions {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+  margin-bottom: 16px;
+}
+.doc-actions .btn-text { padding-left: 0; }
+.doc-actions-right { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.doc {
+  background: var(--surface);
+  border: 1px solid var(--glass-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  padding: clamp(24px, 5.5vw, 56px);
+  font-size: 15.5px; line-height: 1.65;
+}
+
+.doc-header {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 28px); align-items: center;
+  padding-bottom: clamp(20px, 3vw, 28px); border-bottom: 1px solid var(--glass-border-soft);
+}
+.doc-photo {
+  width: clamp(76px, 12vw, 108px); height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%;
+  border: 2px solid var(--violet);
+  box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.14);
+}
+.doc h1 { font-size: clamp(24px, 3.8vw, 36px); letter-spacing: -0.03em; }
+.doc-role { margin-top: 4px; font-weight: 600; color: var(--violet-text); }
+.doc-contacts {
+  display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 12px; list-style: none;
+  font-size: 14px; color: var(--text-2);
+}
+.doc-contacts a { overflow-wrap: anywhere; text-decoration: underline; text-decoration-color: var(--glass-border); text-underline-offset: 3px; }
+.doc-contacts a:hover { color: var(--text); text-decoration-color: currentColor; }
+
+.doc-section { padding-top: clamp(22px, 3vw, 30px); }
+.doc-section h2 {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  font: 600 12.5px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-text);
+}
+.doc-section h2::after { content: ""; flex: 1; height: 1px; background: var(--glass-border-soft); }
+.doc-section > p { color: var(--text-2); }
+
+.entry + .entry { margin-top: 16px; }
+.entry-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px; }
+.entry h3 { font-size: 16.5px; font-weight: 650; letter-spacing: -0.01em; line-height: 1.35; }
+.entry-time { font: 500 12.5px var(--mono); color: var(--text-3); white-space: nowrap; }
+.entry-org { font-size: 14.5px; font-style: italic; color: var(--text-3); }
+.entry p:not(.entry-org) { margin-top: 3px; color: var(--text-2); }
+.entry ul { margin-top: 6px; padding-left: 18px; color: var(--text-2); }
+.entry li + li { margin-top: 3px; }
+.doc-more { margin-top: 16px; font-size: 14.5px; }
+.doc-more a { color: var(--violet-text); text-decoration: underline; text-underline-offset: 3px; }
+
+.skill-table { display: grid; gap: 0; }
+.skill-table > div {
+  display: grid; grid-template-columns: minmax(130px, 0.32fr) minmax(0, 1fr); gap: 4px 18px;
+  padding: 9px 0; border-bottom: 1px solid var(--glass-border-soft);
+}
+.skill-table > div:last-child { border-bottom: 0; }
+.skill-table dt { font-weight: 600; }
+.skill-table dd { color: var(--text-2); }
+
+.doc-note { margin-top: 26px; font-size: 13px; color: var(--text-3); }
+
+@media (max-width: 560px) {
+  .doc { font-size: 15px; border-radius: 20px; }
+  .doc-header { grid-template-columns: minmax(0, 1fr); }
+  .skill-table > div { grid-template-columns: minmax(0, 1fr); }
+  .doc-actions-right { width: 100%; }
+  .doc-actions-right .btn { flex: 1 1 0; }
+}
+
+/* =====================================================================
+   Chop etish: oq qog'oz, bezaklarsiz, yuqori kontrast
+   ===================================================================== */
+@media print {
+  @page { size: A4; margin: 14mm 15mm; }
+
+  :root, :root[data-theme] {
+    --bg: #fff; --surface: #fff;
+    --text: #111; --text-2: #2b2b2b; --text-3: #555;
+    --violet: #5b21b6; --violet-text: #5b21b6; --cyan-text: #0e7490;
+    --glass-border: #cfcfd6; --glass-border-soft: #dcdce2;
+    color-scheme: light;
+  }
+  html, body { background: #fff !important; color: #111 !important; }
+  body { font-size: 10.5pt; }
+
+  .ambient, .site-header, .site-footer, .doc-actions, .skip-link { display: none !important; }
+  .resume-main { padding: 0 !important; }
+  .container, .resume-wrap { max-width: none; padding: 0; }
+
+  .doc { padding: 0; border: 0; border-radius: 0; box-shadow: none; background: #fff; font-size: 10.5pt; line-height: 1.5; }
+  .doc-photo { width: 64pt; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .doc h1 { font-size: 20pt; }
+  .doc-contacts { font-size: 9.5pt; }
+  .doc-contacts a, .doc-more a { text-decoration: none; color: inherit; }
+  .doc-section { padding-top: 12pt; }
+  .doc-section h2 { margin-bottom: 6pt; font-size: 9pt; break-after: avoid; page-break-after: avoid; }
+  .entry, .skill-table > div { break-inside: avoid; page-break-inside: avoid; }
+  .entry + .entry { margin-top: 8pt; }
+  .entry h3 { font-size: 11pt; break-after: avoid; }
+  .skill-table > div { padding: 4pt 0; }
+  .doc-more { display: none; }
+  .doc-note { margin-top: 12pt; font-size: 8.5pt; }
+}
